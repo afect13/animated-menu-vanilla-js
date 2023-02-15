@@ -14,10 +14,16 @@
 
 html {
   box-sizing: border-box;
+  /* scroll-behavior: smooth; */
 }
 
 body {
   margin: 0;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 /* --- Sections -- */
@@ -30,7 +36,7 @@ section {
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
-  letter-spacing: 2px;
+
   color: var(--primaryColor);
   font-family: lucki_r;
 }
@@ -39,14 +45,14 @@ section:after {
   content: "";
   position: absolute;
   bottom: -10px;
-  z-index: 100;
+  z-index: 8;
   width: 100%;
   height: 20px;
   backdrop-filter: blur(4px);
 }
 
 section h1 {
-  font-size: calc(var(--index) * 8);
+  font-size: calc(var(--index) * 6);
   letter-spacing: calc(var(--index) * 1);
   color: var(--primary);
   text-shadow: 10px 10px 10px black;
@@ -75,28 +81,38 @@ section#winter {
   background-position: center center;
 }
 
-/* menu */
 
 .overlay {
   position: fixed;
   z-index: 9;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vw;
-  background-color: rgba(0, 0, 0, 0.7);
-  transform: translateX(-100vw);
-}
-
-.overlay-slide-rigth {
-  transition: all 0.4s ease-in-out;
-  transform: translateX(0);
+  width: 35vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .overlay-slide-left {
   transition: all 0.8s ease-in-out;
-  transform: translateX(-100vw);
+  transform: translateX(65vw);
 }
+
+.overlay-slide-rigth {
+  transition: all 1.6s ease-in-out;
+  transform: translateX(100vw);
+}
+
+
+.section-slide-rigth {
+  transition: all 1.6s ease-in-out;
+  transform: translateX(0);
+}
+
+.section-slide-left {
+  transition: all 0.8s ease-in-out;
+  transform: translateX(-35vw);
+}
+
 
 nav,
 nav ul {
@@ -113,19 +129,22 @@ nav ul {
 }
 
 nav ul li {
-  height: 10%;
+  height: 25%;
   overflow: hidden;
 }
 
 nav li a {
-  position: relative;
-  top: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--primary);
   text-transform: uppercase;
   text-decoration: none;
-  display: block;
+  font-size: var(--index);
+  width: 100%;
+  height: 100%;
   text-align: center;
-  letter-spacing: 4px;
+  letter-spacing: calc(var(--index) / 3);
 }
 
 nav li a:hover {
@@ -148,23 +167,22 @@ nav li:nth-of-type(4) {
   background-color: var(--navWinter);
 }
 
-/* Animated menu */
 
 
 .slide-out-1 {
-  animation: slide-out 0.3s linear 0.4s both ;
+  animation: slide-out 0.3s linear 0.4s both;
 }
 
 .slide-out-2 {
-  animation: slide-out 0.3s linear 0.3s both ;
+  animation: slide-out 0.3s linear 0.3s both;
 }
 
 .slide-out-3 {
-  animation: slide-out 0.3s linear 0.2s both ;
+  animation: slide-out 0.3s linear 0.2s both;
 }
 
 .slide-out-4 {
-  animation: slide-out 0.3s linear 0.1s both ;
+  animation: slide-out 0.3s linear 0.1s both;
 }
 
 @keyframes slide-out {
@@ -172,42 +190,36 @@ nav li:nth-of-type(4) {
     transform: translateX(0);
   }
 
-  to  {
-    transform: translate(-100%);
+  to {
+    transform: translate(100%);
   }
 }
 
-
 .slide-in-1 {
-  animation: slide-in 0.4s linear 0.2s both ;
+  animation: slide-in 0.4s linear 0.2s both;
 }
 
 .slide-in-2 {
-  animation: slide-in 0.4s linear 0.4s both ;
+  animation: slide-in 0.4s linear 0.4s both;
 }
 
 .slide-in-3 {
-  animation: slide-in 0.4s linear 0.6s both ;
+  animation: slide-in 0.4s linear 0.6s both;
 }
 
 .slide-in-4 {
-  animation: slide-in 0.4s linear 0.8s both ;
+  animation: slide-in 0.4s linear 0.8s both;
 }
 
 @keyframes slide-in {
   from {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
 
-  to  {
+  to {
     transform: translate(0);
   }
 }
-
-
-
-
-
 
 .menu-bars {
   position: fixed;
@@ -228,17 +240,15 @@ nav li:nth-of-type(4) {
   transition: 0.4s;
 }
 
-/* Rotate first bar */
+
 .change .bar-1 {
   transform: rotate(-45deg) translate(-7px, 8px);
 }
 
-/* Fade out the second bar */
 .change .bar-2 {
   opacity: 0;
 }
 
-/* Rotate last bar */
 .change .bar-3 {
   transform: rotate(45deg) translate(-6px, -8px);
 }
