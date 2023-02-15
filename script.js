@@ -4,7 +4,13 @@ const navOne = document.getElementById("nav-1");
 const navTwo = document.getElementById("nav-2");
 const navThree = document.getElementById("nav-3");
 const navFour = document.getElementById("nav-4");
+const sectSpring = document.getElementById("spring");
+const sectSummer = document.getElementById("summer");
+const sectAutumn = document.getElementById("autumn");
+const sectWinter = document.getElementById("winter");
+const ancorLinks = document.querySelectorAll('a[href^="#"]');
 
+const secArr = [sectSpring, sectSummer, sectAutumn, sectWinter];
 const navArr = [navOne, navTwo, navThree, navFour];
 
 function replaceNavClass(arg1, arg2) {
@@ -12,43 +18,51 @@ function replaceNavClass(arg1, arg2) {
     n.classList.replace(`slide-${arg1}-${i + 1}`, `slide-${arg2}-${i + 1}`);
   });
 }
+function replaceSectionClass(arg) {
+  secArr.forEach((s) => {
+    s.classList.replace(s.className, `section-slide-${arg}`);
+  });
+}
+
+function toggleOverlayOpacity() {
+  if (menuBars.classList.contains("change")) {
+    overlay.style.opacity = "1";
+  } else {
+    overlay.style.opacity = "0";
+  }
+}
 
 function toggleNav() {
   menuBars.classList.toggle("change");
   overlay.classList.toggle("overlay-active");
   if (overlay.classList.contains("overlay-active")) {
-    // overlay
-    overlay.classList.replace("overlay-slide-left", "overlay-slide-rigth");
-    replaceNavClass("out", "in");
-    // slide
-    // navOne.classList.remove("slide-out-1");
-    // navOne.classList.add("slide-in-1");
-    // navTwo.classList.remove("slide-out-2");
-    // navTwo.classList.add("slide-in-2");
-    // navThree.classList.remove("slide-out-3");
-    // navThree.classList.add("slide-in-3");
-    // navFour.classList.remove("slide-out-4");
-    // navFour.classList.add("slide-in-4");
-  } else {
     overlay.classList.replace("overlay-slide-rigth", "overlay-slide-left");
+    toggleOverlayOpacity();
+    replaceSectionClass("left");
+    replaceNavClass("out", "in");
+  } else {
+    overlay.classList.replace("overlay-slide-left", "overlay-slide-rigth");
+    setTimeout(toggleOverlayOpacity, 1600);
+    replaceSectionClass("rigth");
     replaceNavClass("in", "out");
-    // slide
-    // navOne.classList.remove("slide-in-1");
-    // navOne.classList.add("slide-out-1");
-    // navTwo.classList.remove("slide-in-2");
-    // navTwo.classList.add("slide-out-2");
-    // navThree.classList.remove("slide-in-3");
-    // navThree.classList.add("slide-out-3");
-    // navFour.classList.remove("slide-in-4");
-    // navFour.classList.add("slide-out-4");
   }
 }
-
 menuBars.addEventListener("click", toggleNav);
-// navOne.addEventListener("click", toggleNav);
-// navTwo.addEventListener("click", toggleNav);
-// navThree.addEventListener("click", toggleNav);
-// navFour.addEventListener("click", toggleNav);
+
+
 navArr.forEach((nav) => {
   nav.addEventListener("click", toggleNav);
+});
+
+// smooth scroll
+
+ancorLinks.forEach((e) => {
+  e.addEventListener("click", (event) => {
+    event.preventDefault();
+    const id = e.getAttribute("href");
+    document.querySelector(id).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  });
 });
