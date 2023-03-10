@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: lucki_r;
-  src: url("./fonts/LuckiestGuy-Regular.ttf");
+  src: url("fonts/LuckiestGuy-Regular.ttf");
 }
 
 html {
@@ -59,24 +59,24 @@ section h1 {
 }
 
 section#spring {
-  background-image: url("/image/spring.jpg");
+  background-image: url("image/spring.jpg");
   background-size: cover;
   background-position: center center;
 }
 
 section#summer {
-  background-image: url("/image/summer.jpg");
+  background-image: url("image/summer.jpg");
   background-size: cover;
   background-position: center center;
 }
 
 section#autumn {
-  background-image: url("/image/autumn.jpg");
+  background-image: url("image/autumn.jpg");
   background-size: cover;
   background-position: center center;
 }
 section#winter {
-  background-image: url("/image/winter.jpg");
+  background-image: url("image/winter.jpg");
   background-size: cover;
   background-position: center center;
 }
